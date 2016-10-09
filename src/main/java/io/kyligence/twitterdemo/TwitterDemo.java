@@ -22,7 +22,7 @@ import java.util.Properties;
 @SpringBootApplication
 public class TwitterDemo {
 
-    public static void main(String[] args) throws Exception{
+    /*public static void main(String[] args) throws Exception{
         ApplicationContext context = SpringApplication.run(TwitterDemo.class);
         final KafkaSettings kafkaSettings = context.getBean(KafkaSettings.class);
         Properties prop = new Properties();
@@ -63,5 +63,5 @@ public class TwitterDemo {
         twitterStream.addListener(listener);
         // sample() method internally creates a thread which manipulates TwitterStream and calls these adequate listener methods continuously.
         twitterStream.sample();
-    }
+    }*/
 }
