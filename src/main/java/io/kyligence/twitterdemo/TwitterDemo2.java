@@ -25,19 +25,21 @@ public class TwitterDemo2 {
         prop.put("acks", "0");
         prop.put("value.serializer", StringSerializer.class.getCanonicalName());
         prop.put("key.serializer", StringSerializer.class.getCanonicalName());
-        final String topic = "TWITTER_TAG_STREAM";
+        final String topic = kafkaSettings.getTopic();
+        final String topic2 = "TWITTER_TAG_STREAM";
         final KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(prop);
         final int factor = kafkaSettings.getFactor();
         final Gson gson = new Gson();
         StatusListener listener = new StatusListener() {
             public void onStatus(Status status) {
                 for(int i=0;i<factor;i++){
+                    kafkaProducer.send(new ProducerRecord<String, String>(topic, null, gson.toJson(status)));
                     HashtagEntity[] tags = status.getHashtagEntities();
                     if(tags != null && tags.length != 0){
                         for(HashtagEntity tag : tags){
                             TwitterTuple tuple = new TwitterTuple(status);
                             tuple.setHashTag(tag.getText());
-                            kafkaProducer.send(new ProducerRecord<String, String>(topic, null, gson.toJson(tuple)));
+                            kafkaProducer.send(new ProducerRecord<String, String>(topic2, null, gson.toJson(tuple)));
                         }
 
                     }
