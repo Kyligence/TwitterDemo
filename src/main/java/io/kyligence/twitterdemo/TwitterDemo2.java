@@ -26,7 +26,7 @@ public class TwitterDemo2 {
         prop.put("value.serializer", StringSerializer.class.getCanonicalName());
         prop.put("key.serializer", StringSerializer.class.getCanonicalName());
         final String topic = kafkaSettings.getTopic();
-        final String topic2 = "TWITTER_TAG_STREAM";
+        final String topic2 = "TWITTER_TAG_STREAM2";
         final KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(prop);
         final int factor = kafkaSettings.getFactor();
         final Gson gson = new Gson();
