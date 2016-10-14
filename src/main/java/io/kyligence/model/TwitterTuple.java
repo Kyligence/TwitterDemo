@@ -1,14 +1,19 @@
 package io.kyligence.model;
 
+import io.kyligence.util.RegExpUtil;
 import twitter4j.Status;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by xiefan on 16-10-9.
  */
 public class TwitterTuple implements Serializable{
+
+
 
     private long id;
 
@@ -31,11 +36,14 @@ public class TwitterTuple implements Serializable{
     public TwitterTuple(Status status){
         this.id = status.getId();
         this.createdAt = status.getCreatedAt();
-        this.source = status.getSource();
         this.favoriteCount = status.getFavoriteCount();
         this.retweetCount = status.getRetweetCount();
         this.lang  = status.getLang();
         this.userTimezone = status.getUser().getTimeZone();
+        //deal source
+        String rawSource = status.getSource();
+        this.source = RegExpUtil.getPlatformInfo(rawSource);
+        System.out.println("source:"+this.source);
     }
 
     public long getId() {
