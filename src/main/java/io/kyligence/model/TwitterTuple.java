@@ -43,7 +43,7 @@ public class TwitterTuple implements Serializable{
         //deal source
         String rawSource = status.getSource();
         this.source = RegExpUtil.getPlatformInfo(rawSource);
-        System.out.println("source:"+this.source);
+        //System.out.println("source:"+this.source);
     }
 
     public long getId() {
